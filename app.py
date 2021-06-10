@@ -8,10 +8,13 @@ apps = []
 filename = ''
 
 os = sys.platform
-print(os)
 
 
 def addApp():
+
+    for widget in frame.winfo_children():
+        widget.destroy()
+
     if os == 'darwin':
         filename = filedialog.askopenfilename(
             initialdir="/applications", title="Select File")
