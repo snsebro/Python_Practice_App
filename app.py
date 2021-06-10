@@ -7,15 +7,14 @@ root = tk.Tk()
 apps = []
 filename = ''
 
-os = sys.platform
-
+user_os = sys.platform
 
 def addApp():
 
     for widget in frame.winfo_children():
         widget.destroy()
 
-    if os == 'darwin':
+    if user_os == 'darwin':
         filename = filedialog.askopenfilename(
             initialdir="/applications", title="Select File")
         apps.append(filename)
@@ -27,6 +26,11 @@ def addApp():
     for app in apps:
         label = tk.Label(frame, text=app, bg="white")
         label.pack()
+
+
+def runApps():
+    for app in apps:
+        os.system("open {}".format(app))
 
 
 canvas = tk.Canvas(root, height=700, width=700)
@@ -41,7 +45,7 @@ openFile = tk.Button(root, text="Open File", padx=10,
 openFile.pack()
 
 runApps = tk.Button(root, text="Run Apps", padx=10,
-                    pady=5, fg="black", bg="white")
+                    pady=5, fg="black", bg="white", command=runApps)
 
 runApps.pack()
 
